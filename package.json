@@ -1,13 +1,13 @@
 {
   "name": "playgen",
-  "version": "1.3.0",
+  "productName": "Music Downloader",
+  "version": "1.4.0",
   "description": "YouTube music downloader & playlist manager",
-  "desktopName": "PlayGen",
+  "desktopName": "Music Downloader",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "electron . --dev",
-    "build": "npx electron-packager . PlayGen --platform=win32 --arch=x64 --out=dist --overwrite --icon=assets/playgen-icon.ico --ignore=\"dist|.git|.gitignore\" --asar --extra-resource=assets/bin",
+    "icons": "electron scripts/generate-icons.js",
     "dist": "electron-builder --publish never",
     "dist:win": "electron-builder --win nsis --x64 --publish never",
     "dist:linux": "electron-builder --linux AppImage --x64 --publish never"
@@ -18,11 +18,10 @@
     "music",
     "playlist"
   ],
-  "author": "PlayGen",
+  "author": "Belinda Hagen",
   "license": "MIT",
   "build": {
-    "appId": "com.playgen.app",
-    "productName": "PlayGen",
+    "appId": "com.musicdownloader.app",
     "directories": {
       "output": "dist"
     },
@@ -34,7 +33,8 @@
       "!assets/bin/**/*",
       "package.json"
     ],
-    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "artifactName": "Music-Downloader-${version}-${os}-${arch}.${ext}",
+    "publish": null,
     "win": {
       "target": [
         "nsis"
@@ -54,11 +54,12 @@
       "target": [
         "AppImage"
       ],
-      "icon": "assets/icons",
+      "icon": "assets/playgen-icon",
       "category": "AudioVideo",
       "syncDesktopName": true
     },
     "nsis": {
+      "guid": "027c5436-fd07-503f-a445-5b12e0f03c2a",
       "oneClick": true,
       "perMachine": false,
       "allowToChangeInstallationDirectory": false,
@@ -68,7 +69,6 @@
   },
   "devDependencies": {
     "electron": "^44.4.5",
-    "electron-builder": "^26.15.3",
-    "electron-packager": "^17.1.2"
+    "electron-builder": "^26.15.3"
   }
 }

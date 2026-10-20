@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Music Downloader</title>
+  <desc>Four dark sound bars form a forward-facing play symbol on a bright teal tile.</desc>
+  <defs>
+    <linearGradient id="teal" x1="80" y1="24" x2="432" y2="488" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#14b8a6"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#teal)"/>
+  <rect x="25" y="25" width="462" height="462" rx="111" fill="none" stroke="#ffffff" stroke-opacity=".2" stroke-width="2"/>
+  <!-- A descending rhythm of rounded bars gives the play silhouette its shape. -->
+  <g fill="#083d3a">
+    <rect x="140" y="136" width="44" height="240" rx="22"/>
+    <rect x="208" y="168" width="44" height="176" rx="22"/>
+    <rect x="276" y="200" width="44" height="112" rx="22"/>
+    <rect x="344" y="232" width="44" height="48" rx="22"/>
+  </g>
+</svg>

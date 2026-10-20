@@ -3,32 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PlayGen</title>
+  <title>Music Downloader</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="loading-screen" id="loading-screen">
     <div class="loading-logo">
-      <img src="../assets/playgen-icon.png" alt="PlayGen" class="loading-logo-img">
+      <img src="../assets/playgen-icon.svg" alt="Music Downloader" class="loading-logo-img">
+      <span class="intro-wordmark">Music Downloader</span>
+    </div>
+    <div class="intro-bars" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
     <div class="loading-spinner"></div>
-    <div class="loading-text">Loading...</div>
   </div>
-
-  <div class="scanlines"></div>
+  <script>
+    // Decide synchronously (before first paint) whether to play the intro.
+    // The flag mirrors the "startupAnimation" setting saved in the app DB.
+    try {
+      const theme = localStorage.getItem('theme');
+      if (theme) document.documentElement.dataset.theme = theme;
+      if (localStorage.getItem('startupAnimation') !== 'false') {
+        document.getElementById('loading-screen').classList.add('intro');
+      }
+    } catch {}
+  </script>
 
   <header class="titlebar" id="titlebar">
     <div class="titlebar-logo">
-      <img src="../assets/playgen-icon.png" alt="" class="logo-icon" draggable="false">
-      <span class="logo-text">Play<span class="logo-accent">Gen</span></span>
+      <img src="../assets/playgen-icon.svg" alt="" class="logo-icon" draggable="false">
+      <span class="logo-text">Music Downloader</span>
     </div>
     <div class="titlebar-controls">
-      <button class="titlebar-btn" id="btn-minimize" title="Minimize">-</button>
-      <button class="titlebar-btn" id="btn-maximize" title="Maximize">&#9633;</button>
-      <button class="titlebar-btn btn-close" id="btn-close" title="Close">x</button>
+      <button class="titlebar-btn" id="btn-minimize" title="Minimize" aria-label="Minimize">
+        <svg viewBox="0 0 10 10" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1"><line x1="0" y1="5.5" x2="10" y2="5.5"/></svg>
+      </button>
+      <button class="titlebar-btn" id="btn-maximize" title="Maximize" aria-label="Maximize">
+        <svg viewBox="0 0 10 10" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="9" height="9" rx="1"/></svg>
+      </button>
+      <button class="titlebar-btn btn-close" id="btn-close" title="Close" aria-label="Close">
+        <svg viewBox="0 0 10 10" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><line x1="0.5" y1="0.5" x2="9.5" y2="9.5"/><line x1="9.5" y1="0.5" x2="0.5" y2="9.5"/></svg>
+      </button>
     </div>
   </header>
 
@@ -76,7 +94,13 @@
       <aside class="sidebar" id="sidebar">
         <div class="sidebar-section">
           <h3 class="sidebar-heading">Library</h3>
-          <div class="nav-item active" data-view="all" id="nav-all">
+          <div class="nav-item active" data-view="home" id="nav-home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" width="16" height="16">
+              <path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>
+            </svg>
+            <span>Home</span>
+          </div>
+          <div class="nav-item" data-view="all" id="nav-all">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
@@ -123,6 +147,14 @@
       </aside>
 
       <main class="main-area" id="main-area">
+        <section class="home-view" id="home-view" hidden>
+          <header class="home-header">
+            <h2 class="home-title" id="home-title">Your library</h2>
+            <p class="home-subtitle" id="home-subtitle"></p>
+          </header>
+          <div class="home-grid" id="home-grid"></div>
+        </section>
+
         <div class="view-hero" id="view-hero">
           <div class="view-hero-bg" id="view-hero-bg"></div>
           <div class="view-hero-overlay"></div>
@@ -175,7 +207,7 @@
           <div class="deps-warning-icon">!</div>
           <h3>Missing Dependencies</h3>
           <p id="deps-warning-text"></p>
-          <p class="deps-help">Install them and restart PlayGen to get started.</p>
+          <p class="deps-help">Install them and restart Music Downloader to get started.</p>
         </div>
       </main>
     </div>
@@ -313,7 +345,9 @@
     <div class="settings-panel">
       <div class="settings-header">
         <h3>Settings</h3>
-        <button class="settings-close" id="settings-close">x</button>
+        <button class="settings-close" id="settings-close" title="Close" aria-label="Close settings">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
       <div class="settings-body">
         <div class="settings-group">
@@ -326,6 +360,74 @@
             </div>
           </label>
           <p class="settings-hint">When enabled, a small floating player appears when you minimize the main window.</p>
+          <div class="settings-subtitle">Style</div>
+          <div class="mini-style-options" role="radiogroup" aria-label="Mini player style">
+            <label class="mini-style-option">
+              <input type="radio" name="setting-mini-style" value="classic" checked>
+              <span class="mini-style-preview" data-width="330" data-height="88"></span>
+              <span class="mini-style-name">Classic</span>
+            </label>
+            <label class="mini-style-option">
+              <input type="radio" name="setting-mini-style" value="compact">
+              <span class="mini-style-preview" data-width="300" data-height="60"></span>
+              <span class="mini-style-name">Compact</span>
+            </label>
+            <label class="mini-style-option">
+              <input type="radio" name="setting-mini-style" value="cover">
+              <span class="mini-style-preview" data-width="200" data-height="200"></span>
+              <span class="mini-style-name">Cover</span>
+            </label>
+            <label class="mini-style-option">
+              <input type="radio" name="setting-mini-style" value="glass">
+              <span class="mini-style-preview" data-width="368" data-height="116"></span>
+              <span class="mini-style-name">Extended</span>
+            </label>
+          </div>
+          <div class="settings-subtitle">Size</div>
+          <div class="theme-options size-options" role="radiogroup" aria-label="Mini player size">
+            <label class="theme-option">
+              <input type="radio" name="setting-mini-size" value="small" data-scale="0.85">
+              <span>Small</span>
+            </label>
+            <label class="theme-option">
+              <input type="radio" name="setting-mini-size" value="medium" data-scale="1" checked>
+              <span>Medium</span>
+            </label>
+            <label class="theme-option">
+              <input type="radio" name="setting-mini-size" value="large" data-scale="1.25">
+              <span>Large</span>
+            </label>
+            <label class="theme-option">
+              <input type="radio" name="setting-mini-size" value="xlarge" data-scale="1.5">
+              <span>Extra large</span>
+            </label>
+          </div>
+          <p class="settings-hint" id="mini-size-hint"></p>
+        </div>
+        <div class="settings-group">
+          <h4 class="settings-group-title">Startup</h4>
+          <label class="settings-toggle">
+            <span class="settings-label">Play intro animation on launch</span>
+            <div class="toggle-switch">
+              <input type="checkbox" id="setting-startup-animation" checked>
+              <span class="toggle-slider"></span>
+            </div>
+          </label>
+          <p class="settings-hint">Shows a short logo animation when Music Downloader starts.</p>
+        </div>
+        <div class="settings-group">
+          <h4 class="settings-group-title">About</h4>
+          <div class="settings-label">Music Downloader <span class="settings-value" id="app-version">–</span></div>
+        </div>
+        <div class="settings-group">
+          <h4 class="settings-group-title">Downloads</h4>
+          <div class="settings-row">
+            <div>
+              <div class="settings-label">yt-dlp <span class="settings-value" id="ytdlp-version">–</span></div>
+              <p class="settings-hint" id="ytdlp-status">Updates automatically once a day.</p>
+            </div>
+            <button class="settings-action-btn" id="btn-ytdlp-update">Check for updates</button>
+          </div>
         </div>
         <div class="settings-group">
           <h4 class="settings-group-title">Color Theme</h4>

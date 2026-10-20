@@ -24,16 +24,12 @@ jobs:
             artifact: playgen-windows
             asset_glob: |
               dist/*.exe
-              dist/*.blockmap
-              dist/latest.yml
           - name: Linux
             os: ubuntu-latest
             script: dist:linux
             artifact: playgen-linux
             asset_glob: |
               dist/*.AppImage
-              dist/*.blockmap
-              dist/latest-linux.yml
 
     steps:
       - name: Checkout
@@ -93,7 +89,7 @@ jobs:
 
           version="$(node -p "require('./package.json').version")"
           tag="v${version}"
-          title="PlayGen ${tag}"
+          title="Music Downloader ${tag}"
 
           {
             echo "Automated draft release for commit ${GITHUB_SHA}."
