@@ -10,12 +10,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/belinda-hagen/PlayGen-Player/releases/latest"><img src="https://img.shields.io/github/v/tag/belinda-hagen/PlayGen-Player?label=Version&style=flat-square&color=a855f7" alt="Version" /></a>
-  <a href="https://github.com/belinda-hagen/PlayGen-Player/releases"><img src="https://img.shields.io/github/downloads/belinda-hagen/PlayGen-Player/total?style=flat-square&color=ff8c00&label=Downloads" alt="Downloads" /></a>
+  <a href="https://github.com/belinda-hagen/Music-Downloader/releases/latest"><img src="https://img.shields.io/github/v/tag/belinda-hagen/Music-Downloader?label=Version&style=flat-square&color=a855f7" alt="Version" /></a>
+  <a href="https://github.com/belinda-hagen/Music-Downloader/releases"><img src="https://img.shields.io/github/downloads/belinda-hagen/Music-Downloader/total?style=flat-square&color=ff8c00&label=Downloads" alt="Downloads" /></a>
   <img src="https://img.shields.io/badge/Electron-44-191970?style=flat-square&logo=electron&logoColor=white" alt="Electron" />
   <img src="https://img.shields.io/badge/Platform-Windows-0078D4?style=flat-square&logo=windows11&logoColor=white" alt="Platform" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-ff2d78?style=flat-square" alt="License" /></a>
-  <a href="https://github.com/belinda-hagen/PlayGen-Player/stargazers"><img src="https://img.shields.io/github/stars/belinda-hagen/PlayGen-Player?style=flat-square&color=ffcc00&label=Stars" alt="Stars" /></a>
+  <a href="https://github.com/belinda-hagen/Music-Downloader/stargazers"><img src="https://img.shields.io/github/stars/belinda-hagen/Music-Downloader?style=flat-square&color=ffcc00&label=Stars" alt="Stars" /></a>
 </p>
 
 <p align="center">
@@ -110,7 +110,7 @@
 
 ## Install
 
-Download `Music-Downloader-<version>-win-x64.exe` from the [latest release](https://github.com/belinda-hagen/PlayGen-Player/releases/latest) and run it. To update, run the newer installer — your library, playlists and settings are kept.
+Download `Music-Downloader-<version>-win-x64.exe` from the [latest release](https://github.com/belinda-hagen/Music-Downloader/releases/latest) and run it. To update, run the newer installer — your library, playlists and settings are kept.
 
 ## Run from Source
 
@@ -121,8 +121,8 @@ Download `Music-Downloader-<version>-win-x64.exe` from the [latest release](http
 | **ffmpeg** | Bundled on Windows. Elsewhere: [ffmpeg.org](https://ffmpeg.org/download.html) |
 
 ```bash
-git clone https://github.com/belinda-hagen/PlayGen-Player.git
-cd PlayGen-Player
+git clone https://github.com/belinda-hagen/Music-Downloader.git
+cd Music-Downloader
 npm install
 npm start
 ```
